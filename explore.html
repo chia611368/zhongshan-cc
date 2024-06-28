@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中山好逛圖鑑 - 探索中山</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .header .logo .green-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #55b74f;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .header .logo .green-dot.top-1 {
+            top: -10px;
+            left: 65px;
+        }
+        .header .logo .green-dot.top-2 {
+            top: -10px;
+            left: 85px;
+        }
+        .header .logo .separator {
+            height: 40px;
+            width: 2px;
+            background-color: #ccc;
+            margin-left: 10px;
+            position: absolute;
+            right: -20px;
+        }
+        .header nav {
+            display: flex;
+            align-items: center;
+        }
+        .header nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            position: relative;
+            padding: 0 10px;
+        }
+        .header nav a:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 20px;
+            border-right: 1px solid #333;
+        }
+        .content {
+            padding: 20px;
+        }
+        .explore-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .explore-section h2 {
+            color: #55b74f;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sub-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .sub-nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sub-nav a.active {
+            background-color: #55b74f;
+            color: #ffffff;
+        }
+        .categories {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .categories.active {
+            display: flex;
+        }
+        .category-card {
+            background-color: #ffffff;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: calc(20% - 10px); 
+            box-sizing: border-box;
+            height: 300px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .category-card img {
+            width: 100%;
+            height: 150px; 
+            object-fit: cover; 
+            border-radius: 8px;
+            margin-bottom: -20px;
+        }
+        .category-card h3 {
+            color: #55b74f;
+            margin-bottom: 0px;
+            font-size: 18px;
+        }
+        .category-card p {
+            margin: 0;
+            color: #333;
+            font-size: 14px;
+
+        }
+        .category-card a {
+            color: #55b74f;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        #scrollTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.8); 
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; 
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+#scrollTopBtn:hover {
+    background-color: rgba(240, 240, 240, 0.8); 
+}
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            中山
+            好
+            <span class="green-dot top-1"></span>
+            逛
+            <span class="green-dot top-2"></span>
+            圖鑑
+            <div class="separator"></div>
+        </div>
+        <nav>
+            <a href="index.html">首頁</a>
+            <a href="explore.html">探索中山</a>
+            <a href="news.html">新鮮事快報</a>
+            <a href="transport.html">交通指南</a>
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="explore-section">
+            <h2>探索中山</h2>
+            <div class="sub-nav">
+                <a href="#good-eat" class="active" onclick="showCategory('good-eat')">逛好吃</a>
+                <a href="#good-play" onclick="showCategory('good-play')">逛好玩</a>
+                <a href="#good-buy" onclick="showCategory('good-buy')">逛好買</a>
+                <a href="#art-culture" onclick="showCategory('art-culture')">逛藝文</a>
+            </div>
+            <div id="good-eat" class="categories active">
+                <div class="category-card">
+                    <img src="https://i.imgur.com/yHgEFOS.jpeg" alt="DOUBLE SINGLE">
+                    <h3>DOUBLE SINGLE</h3>
+                    <p>台北市大同區南京西路18巷26-1號</p>
+                    <p><a href="https://maps.app.goo.gl/U5qzeEZfrDiFLTYj6" target="_blank">地圖連結</a></p>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.imgur.com/6xEgQ0P.jpeg" alt="荷蘭小鬆餅 長安本店">
+                    <h3>荷蘭小鬆餅</h3>
+                    <p>台北市大同區長安西路52巷18號</p>
+                    <p><a href="https://maps.app.goo.gl/ddFvKaV4VCFt9m6K6" target="_blank">地圖連結</a></p>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.imgur.com/Pg9PDx0.png" alt="隱家拉麵 赤峰店">
+                    <h3>隱家拉麵</h3>
+                    <p>台北市大同區南京西路25巷28號</p>
+                    <p><a href="https://maps.app.goo.gl/BDRy3ZJ6jgqZ5od3A" target="_blank">地圖連結</a></p>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.imgur.com/VSgiAJn.jpeg" alt="螺絲瑪莉義麵坊">
+                    <h3>螺絲瑪莉義麵坊</h3>
+                    <p>台北市中山區南京西路12巷13弄9號</p>
+                    <p><a href="https://maps.app.goo.gl/jW4B4TBjVeGZrsCo9" target="_blank">地圖連結</a></p>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.imgur.com/gqnpedD.jpeg" alt="waku waku pasta 赤峰店">
+                    <h3>waku waku pasta</h3>
+                    <p>台北市大同區赤峰街8巷4號</p>
+                    <p><a href="https://maps.app.goo.gl/Tk5evPPNpqsbJYa56" target="_blank">地圖連結</a></p>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.imgur.com/fZqbJYF.jpeg" alt="卜卜商店">
+                    <h3>卜卜商店</h3>
+                    <p>台北市大同區赤峰街49巷2號2樓</p>
+                    <p><a href="https://maps.app.goo.gl/65jSTsyuACgeXPvz7" target="_blank">地圖連結</a></p>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.imgur.com/nMoRbcj.jpeg" alt="大鶴黑寶">
+                    <h3>大鶴黑寶</h3>
+                    <p>台北市中山區南京東路一段13巷7弄9號1樓</p>
+                    <p><a href="https://maps.app.goo.gl/Scc7VTDk1nLR2A9d9" target="_blank">地圖連結</a></p>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.imgur.com/LHe9ouQ.jpeg" alt="二屋牡蠣拉麵">
+                    <h3>二屋牡蠣拉麵</h3>
+                    <p>台北市大同區赤峰街35巷11號</p>
+                    <p><a href="https://maps.app.goo.gl/CBXJgiWLR4Vn26RZ6" target="_blank">地圖連結</a></p>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.imgur.com/mW5TEpe.jpeg" alt="KATSU 鑫豬排蓋飯 中山店">
+                    <h3>KATSU 鑫豬排蓋飯</h3>
+                    <p>台北市大同區南京西路64巷16-3號</p>
+                    <p><a href="https://maps.app.goo.gl/BbXsTihga91Ekodq7" target="_blank">地圖連結</a></p>
+                </div>
+                <div class="category-card">
+                    <img src="https://i.imgur.com/Hlpnge8.jpeg" alt="北風社">
+                    <h3>北風社</h3>
+                    <p>台北市大同區赤峰街47巷18號2樓</p>
+                    <p><a href="https://maps.app.goo.gl/27ZBgjNv4MJkvpQh7" target="_blank">地圖連結</a></p>
+                </div>
+            </div>
+            <div id="good-play" class="categories">
+                <div class="category-card">
+    <img src="https://i.imgur.com/NGOuttd.jpeg" alt="Boringearrings">
+    <h3>Boringearrings</h3>
+    <p>台北市大同區赤峰街40號</p>
+    <p><a href="https://maps.app.goo.gl/Boringearrings" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/XKi4EuJ.jpeg" alt="Does Art 都是藝術">
+    <h3>Does Art 都是藝術</h3>
+    <p>台北市中山區中山北路二段22之2號5樓</p>
+    <p><a href="https://maps.app.goo.gl/DoesArt" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/xNHDTAJ.jpeg" alt="WEDDING CODE">
+    <h3>WEDDING CODE</h3>
+    <p>台北市中山區南京西路11號2樓</p>
+    <p><a href="https://maps.app.goo.gl/WEDDINGCODE" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/AxIqRv4.jpeg" alt="PICK&COLLECT">
+    <h3>PICK&COLLECT</h3>
+    <p>台北市大同區赤峰街28之4號1F</p>
+    <p><a href="https://maps.app.goo.gl/PICKANDCOLLECT" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/0vI40Qu.jpeg" alt="Artist Mosaic Craft Studio">
+    <h3>Artist Mosaic Craft Studio</h3>
+    <p>台北市中山區南京東路一段25號9樓之1</p>
+    <p><a href="https://maps.app.goo.gl/ArtistMosaic" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/ACTWd86.jpeg" alt="迷失地工作室">
+    <h3>迷失地工作室</h3>
+    <p>台北市中山區天津街63號6樓</p>
+    <p><a href="https://maps.app.goo.gl/MysteryStudio" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/T7QYIl7.jpeg" alt="光點台北">
+    <h3>光點台北</h3>
+    <p>台北市中山區中山北路二段18號</p>
+    <p><a href="https://maps.app.goo.gl/SpotTaipei" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/51Re4fz.jpeg" alt="Fizzy Fizzy Studio">
+    <h3>Fizzy Fizzy Studio</h3>
+    <p>台北市大同區赤峰街49巷17號2樓</p>
+    <p><a href="https://maps.app.goo.gl/FizzyFizzy" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/IolLeTh.jpeg" alt="Snapshot 韓式拍貼機">
+    <h3>Snapshot 韓式拍貼機</h3>
+    <p>台北市大同區南京西路18巷6號 2號樓之3</p>
+    <p><a href="https://maps.app.goo.gl/Snapshot" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/0HWjqUz.jpeg" alt="SMILE 韓式拍貼">
+    <h3>SMILE 韓式拍貼</h3>
+    <p>台北市中山區中山北路二段36巷21號</p>
+    <p><a href="https://maps.app.goo.gl/SMILE" target="_blank">地圖連結</a></p>
+</div>
+
+
+            </div>
+            <div id="good-buy" class="categories">
+                <div class="category-card">
+    <img src="https://i.imgur.com/llOpVmm.jpeg" alt="WOOPLANET 行星">
+    <h3>WOOPLANET 行星</h3>
+    <p>台北市大同區赤峰街3巷20號</p>
+    <p><a href="https://maps.app.goo.gl/LNotVY4RtVcyQeCd8" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/qFSc0qQ.jpeg" alt="NATURAL KITCHEN">
+    <h3>NATURAL KITCHEN</h3>
+    <p>台北市大同區赤峰街3巷28號</p>
+    <p><a href="https://maps.app.goo.gl/T6sny9eN8UubxM5c9" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/eQqocnc.jpeg" alt="10/10 HOPE">
+    <h3>10/10 HOPE</h3>
+    <p>台北市大同區赤峰街3巷5-1號</p>
+    <p><a href="https://maps.app.goo.gl/dHBX2TJ8gurFuFHm9" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/4zrWQ3A.jpeg" alt="UR LIVING生活美學">
+    <h3>UR LIVING生活美學</h3>
+    <p>台北市中山區中山北路二段16巷12號</p>
+    <p><a href="https://maps.app.goo.gl/URLiving" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/oSvIbW0.png" alt="MITTY">
+    <h3>MITTY</h3>
+    <p>台北市大同區赤峰街43號2樓</p>
+    <p><a href="https://maps.app.goo.gl/7p6jG2c66ZYdDYU19" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/wI8bUA4.jpeg" alt="SNAPPP寫真私館AKA赤店">
+    <h3>SNAPPP寫真私館AKA赤店</h3>
+    <p>台北市大同區赤峰街28-2號1樓</p>
+    <p><a href="https://maps.app.goo.gl/tyNdFRPkRZawdBTk8" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/u7won9c.jpeg" alt="底片叔叔">
+    <h3>底片叔叔</h3>
+    <p>台北市大同區承德路二段1巷11號1樓</p>
+    <p><a href="https://maps.app.goo.gl/gqevR2KVncGDBow5A" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/KZ0tCg5.jpeg" alt="QUEEN SHOP 台北南西門市">
+    <h3>QUEEN SHOP 台北南西門市</h3>
+    <p>台北市中山區南京西路23巷5-3號</p>
+    <p><a href="https://maps.app.goo.gl/nKarV8Epzfv4LT2p6" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/g5MC8Sw.jpeg" alt="PAR STORE">
+    <h3>PAR STORE</h3>
+    <p>台北市大同區赤峰街3巷1號</p>
+    <p><a href="https://maps.app.goo.gl/hSJ2878ft48TEqon6" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/tNc2KlN.jpeg" alt="AIR SPACE 中山店">
+    <h3>AIR SPACE 中山店</h3>
+    <p>台北市大同區南京西路63號</p>
+    <p><a href="https://maps.app.goo.gl/vpdkamZYpJEdc22S9" target="_blank">地圖連結</a></p>
+</div>
+
+            </div>
+            <div id="art-culture" class="categories">
+                <div class="category-card">
+    <img src="https://i.imgur.com/kbD0QyO.jpeg" alt="台北當代藝術館">
+    <h3>台北當代藝術館</h3>
+    <p>台北市大同區長安西路39號</p>
+    <p><a href="https://maps.app.goo.gl/JFKX4UPi14EyRgyf7" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/vqqEqpu.jpeg" alt="濕地｜venue">
+    <h3>濕地｜venue</h3>
+    <p>台北市中山區林森北路107巷10號</p>
+    <p><a href="https://maps.app.goo.gl/1ZBgM1EQySSi29pG9" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/wED0QJU.jpeg" alt="PPP">
+    <h3>PPP</h3>
+    <p>台北市中山區中山北路二段26巷2號1樓</p>
+    <p><a href="https://maps.app.goo.gl/AEfAYnonGCKgxiCz8" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/rRWVG4q.jpeg" alt="朋丁 Pon Ding">
+    <h3>朋丁 Pon Ding</h3>
+    <p>台北市中山區中山北路一段53巷6號</p>
+    <p><a href="https://maps.app.goo.gl/anKA7X3PmVGQCGcT9" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/pHV047u.jpeg" alt="春秋書店">
+    <h3>春秋書店</h3>
+    <p>台北市大同區赤峰街41巷7號</p>
+    <p><a href="https://maps.app.goo.gl/tF1mV9fk8J46qDu68" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/8eJniTs.jpeg" alt="田園城市生活風格書店">
+    <h3>田園城市生活風格書店</h3>
+    <p>台北市中山區中山北路二段72巷6號</p>
+    <p><a href="https://maps.app.goo.gl/FE3SDHJGcyrQ4nsy5" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/4JBak4s.jpeg" alt="小器藝廊xiaoqi+g">
+    <h3>小器藝廊xiaoqi+g</h3>
+    <p>台北市大同區赤峰街17巷4號</p>
+    <p><a href="https://maps.app.goo.gl/KAJwmBCjneXFqUZ66" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/HCOBTz1.jpeg" alt="非畫廊">
+    <h3>非畫廊</h3>
+    <p>台北市長安東路一段9號2樓</p>
+    <p><a href="https://maps.app.goo.gl/vbrzidpMLaoEt6J19" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/3NtEEog.jpeg" alt="浮光書店">
+    <h3>浮光書店</h3>
+    <p>台北市大同區赤峰街47巷16號2樓</p>
+    <p><a href="https://maps.app.goo.gl/8cBbAFD5xZBwoEML9" target="_blank">地圖連結</a></p>
+</div>
+<div class="category-card">
+    <img src="https://i.imgur.com/xUDCC0s.jpeg" alt="荒花書店">
+    <h3>荒花書店</h3>
+    <p>台北市大同區承德路一段69巷7號</p>
+    <p><a href="https://maps.app.goo.gl/V1Sn4GFWBbbxStEe6" target="_blank">地圖連結</a></p>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+   <script>
+    function showCategory(categoryId) {
+        const categories = document.querySelectorAll('.categories');
+        const links = document.querySelectorAll('.sub-nav a');
+        
+        categories.forEach(category => {
+            if (category.id === categoryId) {
+                category.classList.add('active');
+            } else {
+                category.classList.remove('active');
+            }
+        });
+
+        links.forEach(link => {
+            if (link.getAttribute('href').substring(1) === categoryId) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+
+        // Prevent default anchor click behavior
+        event.preventDefault();
+    }
+    window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        scrollTopBtn.style.display = "flex"; 
+    } else {
+        scrollTopBtn.style.display = "none";
+    }
+}
+
+function scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+</script>
+<button id="scrollTopBtn" onclick="scrollToTop()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 19V5" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5 12L12 5L19 12" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
+
+</body>
+</html>

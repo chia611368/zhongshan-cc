@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中山好逛圖鑑 - 交通指南</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .header .logo .green-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #55b74f;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .header .logo .green-dot.top-1 {
+            top: -10px;
+            left: 65px;
+        }
+        .header .logo .green-dot.top-2 {
+            top: -10px;
+            left: 85px;
+        }
+        .header .logo .separator {
+            height: 40px;
+            width: 2px;
+            background-color: #ccc;
+            margin-left: 10px;
+            position: absolute;
+            right: -20px;
+        }
+        .header nav {
+            display: flex;
+            align-items: center;
+        }
+        .header nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            position: relative;
+            padding: 0 10px;
+        }
+        .header nav a:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 20px;
+            border-right: 1px solid #333;
+        }
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            gap: 20px; 
+        }
+        .map {
+            flex: 0 0 60%;
+            text-align: center;
+        }
+        .map iframe {
+            width: 100%;
+            height: 400px;
+        }
+        .info {
+            flex: 0 0 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .info h2 {
+            color: #55b74f;
+        }
+        .info .section {
+            margin-bottom: 20px;
+        }
+        .info .section h3 {
+            display: inline-block;
+            background-color: #55b74f;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        .info p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            中山
+            好
+            <span class="green-dot top-1"></span>
+            逛
+            <span class="green-dot top-2"></span>
+            圖鑑
+            <div class="separator"></div>
+        </div>
+        <nav>
+            <a href="index.html">首頁</a>
+            <a href="explore.html">探索中山</a>
+            <a href="news.html">新鮮事快報</a>
+            <a href="transport.html">交通指南</a>
+        </nav>
+    </header>
+
+    <div class="content">
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7228.9028112971955!2d121.51086379357915!3d25.052684999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a9695326e913%3A0xf29e7a188a747283!2z5Lit5bGx!5e0!3m2!1szh-TW!2stw!4v1719461224636!5m2!1szh-TW!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="info">
+            <h2>Access 交通指南</h2>
+            <div class="section">
+                <h3>公車</h3>
+                <p>12、227、292、310區、282、288、292副、中山幹線、承德幹線</p>
+            </div>
+            <div class="section">
+                <h3>捷運</h3>
+                <p>搭乘捷運淡水信義線、松山新店線至「中山站」</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

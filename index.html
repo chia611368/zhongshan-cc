@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中山好逛圖鑑</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .header .logo .green-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #55b74f;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .header .logo .green-dot.top-1 {
+            top: -10px;
+            left: 65px;
+        }
+        .header .logo .green-dot.top-2 {
+            top: -10px;
+            left: 85px;
+        }
+        .header .logo .separator {
+            height: 40px;
+            width: 2px;
+            background-color: #ccc;
+            margin-left: 10px;
+            position: absolute;
+            right: -20px;
+        }
+        .header nav {
+            display: flex;
+            align-items: center;
+        }
+        .header nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            position: relative;
+            padding: 0 10px;
+        }
+        .header nav a:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 20px;
+            border-right: 1px solid #333;
+        }
+        .main-image {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            text-align: center;
+            color: white;
+        }
+        .main-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .main-image img.active {
+            opacity: 1;
+        }
+        .main-image .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 20%;
+            transform: translateY(-40%); 
+            font-size: 72px; 
+            font-weight: bold;
+            display: flex;
+            justify-content: left;
+            font-family: 'SimHei', 'SimSun', serif; 
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5); 
+        }
+        .main-image .text-overlay .line1 {
+            text-align: left;
+            font-family: 'SimHei', 'SimSun', serif;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+        }
+        .main-image .green-dot {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #55b74f;
+            border-radius: 50%;
+        }
+        .main-image .green-dot.left {
+            left: 10%;
+            top: 30%;
+        }
+        .main-image .green-dot.right {
+            right: 10%;
+            bottom: 20%;
+        }
+        .news-section {
+            padding: 20px;
+        }
+        .news-section h2 {
+            color: #55b74f;
+        }
+        .news-carousel {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        .news-cards {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 10px;
+        }
+        .news-cards::-webkit-scrollbar {
+            display: none;
+        }
+        .news-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+            margin: 0 10px;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .news-card:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.02);
+        }
+        .news-card img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+        .news-carousel::before, .news-carousel::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .news-carousel::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(245, 245, 245, 1), rgba(245, 245, 245, 0));
+        }
+        .news-carousel::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(245, 245, 245, 1), rgba(245, 245, 245, 0));
+        }
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: white;
+            color: gray;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+        }
+        .arrow-btn.left {
+            left: 10px;
+        }
+        .arrow-btn.right {
+            right: 10px;
+        }
+        .arrow-btn::before {
+            content: "❮";
+            font-size: 16px;
+        }
+        .arrow-btn.right::before {
+            content: "❯";
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            中山
+            好
+            <span class="green-dot top-1"></span>
+            逛
+            <span class="green-dot top-2"></span>
+            圖鑑
+            <div class="separator"></div>
+        </div>
+        <nav>
+        <a href="index.html">首頁</a>
+        <a href="explore.html">探索中山</a>
+        <a href="news.html">新鮮事快報</a>
+        <a href="transport.html">交通指南</a>
+        </nav>
+    </header>
+
+  <div class="main-image">
+    <img src="https://i.imgur.com/pnE9f2a.jpeg" alt="中山街景" class
+    "active">
+    <img src="https://i.imgur.com/t79uUGn.jpeg" alt="Image 2">
+    <img src="https://i.imgur.com/raL6RPq.jpeg" alt="Image 3">
+    <img src="https://i.imgur.com/uWSFf6N.jpeg" alt="Image 4">
+    <img src="https://i.imgur.com/mGYY5Xx.jpeg" alt="Image 5">
+    <div class="text-overlay"><span class="line1">心</span><br>中山</div>
+    <div class="green-dot left"></div>
+    <div class="green-dot right"></div>
+</div>
+
+ <section class="news-section">
+    <h2>News! 最新消息</h2>
+    <div class="news-carousel">
+        <button class="arrow-btn left" onclick="scrollLeftButton()"></button>
+        <button class="arrow-btn right" onclick="scrollRightButton()"></button>
+        <div class="news-cards">
+            <div class="news-card">
+                <img src="https://img.skmbuy.com.tw/App_Images/727/Page/2024/0531/5153ee32-af1d-46bd-81e4-fd8f4bc6204b.jpg" alt="News 1">
+                新光三越 台北南西店<br>
+                鯊魚先生快閃店
+            </div>
+            <div class="news-card">
+                <img src="https://res.klook.com/image/upload/v1717138648/zawfcdidoih19rot12e6.jpg" alt="News 2">
+                台北捷運X愛手創<br>
+                微糖生活節-女子喫茶派對
+            </div>
+            <div class="news-card">
+                <img src="https://static.popdaily.com.tw/u/202109/4097efdf-2ccc-4478-a07c-5d67da9594ee.jpeg" alt="News 3">
+                中山站周邊飲料店精選集
+            </div>
+            <div class="news-card">
+                <img src="https://meet.eslite.com/Content/Images/Post/BANNER_20240612115701.jpg" alt="News 4">
+                收服吧!草系寶貝!南西首度植物聚集地 盛大登場
+            </div>
+            <div class="news-card">
+                <img src="https://scontent-hkg4-1.xx.fbcdn.net/v/t39.30808-6/345843422_3055304584763444_5469223137231170852_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=GaG7w-BrYdIQ7kNvgFeGKuf&_nc_ht=scontent-hkg4-1.xx&oh=00_AYC_4DlkoXI40loTcwHabobiDAgwh6OvZxvIbVR9_Btz_w&oe=6683DBBA" alt="News 5">
+                文化幣使用據點＆攻略
+            </div>
+            <div class="news-card">
+                <img src="https://meet.eslite.com/Content/Images/Post/1200_628_20240516173842.jpg" alt="News 6">
+                2024.05-06月<br>
+                肖年頭家夢想市集＿南西場
+            </div>
+            <div class="news-card">
+                <img src="https://grinews.com/news/wp-content/uploads/2016/10/%E8%B5%A4%E5%B3%B0.jpg" alt="News 7">
+                文青小旅行！<br>2024必訪～赤峰街散策地圖
+            </div>
+        </div>
+    </div>
+</section>
+
+    <script>
+        const slides = document.querySelectorAll('.main-image img');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 3000);
+
+        function scrollLeftButton() {
+            const carousel = document.querySelector('.news-cards');
+            carousel.scrollBy({ left: -300, behavior: 'smooth' });
+        }
+
+        function scrollRightButton() {
+            const carousel = document.querySelector('.news-cards');
+            carousel.scrollBy({ left: 300, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
